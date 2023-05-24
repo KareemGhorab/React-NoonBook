@@ -43,7 +43,7 @@ const elements: NavElement[] = [
 
 export default function Navbar() {
 	return (
-		<nav className="absolute bottom-0 w-full border-t py-2 px-5">
+		<nav className="fixed bg-white bottom-0 w-full border-t py-2 px-5 md:top-0 md:bottom-auto">
 			<ul className="flex justify-evenly">
 				{elements.map((element: NavElement) => (
 					<NavLink key={element.title} {...element}></NavLink>

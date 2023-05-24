@@ -22,11 +22,11 @@ export default function NavLink({ icon, title, link }: NavElement) {
 	}
 
 	return (
-		<li className="">
+		<li>
 			<Link href={link} prefetch={true}>
-				<div className="rounded-full">
-					<div className="hidden">{title}</div>
-					<figure className="w-10 rounded-full p-1">
+				<div className="rounded-full md:h-20 md:flex md:items-center">
+					<div className="hidden md:block">{title}</div>
+					<figure className="w-10 rounded-full p-1 md:hidden">
 						<MyIcon {...icon}></MyIcon>
 					</figure>
 				</div>

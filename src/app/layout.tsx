@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import { Inter } from "next/font/google"
 
 import Navbar from "@/components/layout/nav/navbar"
-import Footer from "@/components/layout/footer/footer"
 
 import "./globals.scss"
 
@@ -28,10 +27,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={inter.className + " pb-12"}>
 				<Navbar></Navbar>
-				{children}
-				<Footer></Footer>
+				<div className="p-5 flex justify-center">
+					<main className="w-full max-w-lg">{children}</main>
+				</div>
 			</body>
 		</html>
 	)
