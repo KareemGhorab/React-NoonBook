@@ -14,7 +14,7 @@ export interface NavElement {
 export default function NavLink({ icon, title, link }: NavElement) {
 	const pathName = usePathname()
 
-	// Color the active link
+	// Color the active icon
 	{
 		RegExp(`^${link.toString()}$`).test(pathName)
 			? (icon.svg.fill = "#feee00")
@@ -25,10 +25,10 @@ export default function NavLink({ icon, title, link }: NavElement) {
 		<li>
 			<Link href={link} prefetch={true}>
 				<div className="rounded-full md:h-20 md:flex md:items-center">
-					<div className="hidden md:block">{title}</div>
-					<figure className="w-10 rounded-full p-1 md:hidden">
+					<figure className="w-10 rounded-full p-1">
 						<MyIcon {...icon}></MyIcon>
 					</figure>
+					<div className="hidden md:block text-xl font-semibold">{title}</div>
 				</div>
 			</Link>
 		</li>
