@@ -3,10 +3,24 @@ import User from "../interfaces/user"
 
 const prisma = new PrismaClient()
 
-export const fetchUser = async (id: number): Promise<User | null> => {
+const PAGE_SIZE = 15
+
+export const fetchUser = async (
+	id: number,
+	likedPage: number
+): Promise<User | null> => {
+	if (likedPage < 1) likedPage = 1
+
 	const dbuser = await prisma.user.findFirst({
 		where: {
 			id,
+		},
+		include: {
+			likes: {
+				skip: PAGE_SIZE * (likedPage - 1),
+				take: PAGE_SIZE,
+				
+			},
 		},
 	})
 
@@ -18,6 +32,7 @@ export const fetchUser = async (id: number): Promise<User | null> => {
 		id,
 		username,
 		profilePictureUrl: image,
+		likedPosts,
 	}
 }
 

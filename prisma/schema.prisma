@@ -10,19 +10,33 @@ datasource db {
 model User {
   id       Int     @id @default(autoincrement())
   username String  @unique
-  image    String
-  posts    Post[]
+  image    String?
+  posts    Post[]  @relation("userPosts")
+  likes    Like[]  @relation("likedBy")
 }
 
 model Post {
-  id               Int     @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   title            String
   subtitle         String?
   content          String?
-  user             User    @relation(fields: [userId], references: [id])
+  user             User     @relation("userPosts", fields: [userId], references: [id])
   userId           Int
+  likes            Like[]   @relation("likedPost")
   likes_counter    Int
   comments_counter Int
   image            String?
   hashtags         String?
+  createdAt        DateTime @default(now())
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation("likedBy", fields: [userId], references: [id])
+  userId    Int
+  post      Post     @relation("likedPost", fields: [postId], references: [id])
+  postId    Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
 }

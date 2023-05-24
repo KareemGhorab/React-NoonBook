@@ -4,7 +4,7 @@ import NavLink, { NavElement } from "./nav-link"
 const elements: NavElement[] = [
 	{
 		title: "Home",
-		link: "/",
+		link: "/feed",
 		icon: {
 			svg: {
 				xmlns: "http://www.w3.org/2000/svg",

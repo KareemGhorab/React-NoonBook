@@ -15,6 +15,10 @@ export const fetchPosts = async (page: number): Promise<Post[]> => {
 			include: {
 				user: true,
 			},
+			orderBy: 
+			{
+				
+			}
 		})
 	).map(
 		({
@@ -40,6 +44,7 @@ export const fetchPosts = async (page: number): Promise<Post[]> => {
 				id: userId,
 				username,
 				profilePictureUrl,
+				likedPosts: [],
 			},
 		})
 	)

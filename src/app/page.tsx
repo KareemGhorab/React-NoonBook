@@ -1,10 +1,13 @@
-import PostsList from "@/components/posts/posts-list"
+"use client"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
-export default async function Home() {
-	return (
-		<>
-			{/* @ts-expect-error Server Component */}
-			<PostsList className="" />
-		</>
-	)
+export default function Home() {
+	const router = useRouter()
+
+	useEffect(() => {
+		router.push("/feed")
+	}, [router])
+
+	return <></>
 }
