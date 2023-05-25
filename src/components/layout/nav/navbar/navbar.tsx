@@ -45,7 +45,7 @@ const elements: NavElement[] = [
 
 export default function Navbar() {
 	return (
-		<nav className={`${styles["nav-bar"]} w-full py-2 px-5`}>
+		<nav className={`${styles["nav-bar"]} w-full py-2 px-5 z-50`}>
 			<Logo />
 			<ul className={styles["nav-bar-list"]}>
 				{elements.map((element: NavElement) => (
