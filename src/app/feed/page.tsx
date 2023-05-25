@@ -1,4 +1,3 @@
-import ClientComponent from "@/components/client-component"
 import FeedPosts from "@/components/server/feed-posts"
 
 export default function Feed() {

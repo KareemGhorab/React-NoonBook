@@ -39,14 +39,15 @@ export default function ClientFeedPosts({
 
 	useEffect(() => {
 		if (currentPage < 2) return
-		getNewPosts(currentPage).then((posts) => {
-			if (!posts.length) {
-				setCurrentPage(-1)
-				return
-			}
-			setFullPosts((prev) => prev.concat(posts))
-		})
-		setIsLoadingNewPosts(false)
+		getNewPosts(currentPage)
+			.then((posts) => {
+				if (!posts.length) {
+					setCurrentPage(-1)
+					return
+				}
+				setFullPosts((prev) => prev.concat(posts))
+			})
+			.then(() => setIsLoadingNewPosts(false))
 	}, [currentPage])
 
 	return (
