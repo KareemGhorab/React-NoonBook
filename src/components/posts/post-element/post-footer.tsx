@@ -1,11 +1,31 @@
-import MyIcon from "@/components/ui/myIcon"
+"use client"
+
 import Link from "next/link"
+
+import MyIcon from "@/components/ui/myIcon"
+import { useEffect, useState } from "react"
 
 interface Props {
 	likesCount: number
 	commentsCount: number
 	content: string
 	hashtags: string
+	postId: number
+}
+
+const toggleLike = async (postId: number) => {
+	console.log(process.env.URL)
+	await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`, {
+		method: "POST",
+	})
+}
+
+const isLiked = async (postId: number): Promise<boolean> => {
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`
+	)
+	const is: { liked: boolean } = await res.json()
+	return is.liked
 }
 
 export default function PostFooter({
@@ -13,15 +33,28 @@ export default function PostFooter({
 	content,
 	likesCount,
 	hashtags,
+	postId,
 }: Props) {
+	const [liked, setLiked] = useState(false)
+
+	useEffect(() => {
+		isLiked(postId).then((data: boolean) => setLiked(data))
+	}, [postId])
+
 	return (
 		<footer className="flex flex-col items-start gap-2 px-3">
 			<section className="flex--centered gap-2">
-				<div className="w-8 cursor-pointer">
+				<div
+					className="w-8 cursor-pointer"
+					onClick={() => {
+						toggleLike(postId)
+						setLiked((prev) => !prev)
+					}}
+				>
 					<MyIcon
 						svg={{
 							xmlns: "http://www.w3.org/2000/svg",
-							fill: "none",
+							fill: liked ? "#feee00" : "none",
 							viewBox: "0 0 24 24",
 							strokeWidth: 1.5,
 							stroke: "currentColor",
@@ -39,13 +72,15 @@ export default function PostFooter({
 			<section className="grid gap-3">
 				<div>
 					<p className="text-neutral-600">{content}</p>
-					<p className="text-blue-500">
-						{hashtags.split(" ").map((hashtag) => (
-							<Link key={hashtag} href={"#"}>
-								#{hashtag}{" "}
-							</Link>
-						))}
-					</p>
+					{hashtags.trim().length > 0 && (
+						<p className="text-blue-500">
+							{hashtags.split(" ").map((hashtag) => (
+								<Link key={hashtag} href={"#"}>
+									#{hashtag}{" "}
+								</Link>
+							))}
+						</p>
+					)}
 				</div>
 
 				<p className="cursor-pointer text-neutral-400">

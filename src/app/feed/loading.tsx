@@ -3,7 +3,9 @@ import LoadingIcon from "@/components/ui/loading-icon"
 export default function Loading() {
 	return (
 		<>
-			<LoadingIcon className="w-10" />
+			<main className="w-full h-full flex--centered">
+				<LoadingIcon className="w-40 mt-10" />
+			</main>
 		</>
 	)
 }

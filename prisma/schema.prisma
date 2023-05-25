@@ -8,26 +8,26 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
-  image    String?
-  posts    Post[]  @relation("userPosts")
-  likes    Like[]  @relation("likedBy")
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  image    String
+  posts    Post[] @relation("userPosts")
+  likes    Like[] @relation("likedBy")
 }
 
 model Post {
-  id               Int      @id @default(autoincrement())
-  title            String
-  subtitle         String?
-  content          String?
-  user             User     @relation("userPosts", fields: [userId], references: [id])
-  userId           Int
-  likes            Like[]   @relation("likedPost")
-  likes_counter    Int
-  comments_counter Int
-  image            String?
-  hashtags         String?
-  createdAt        DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  title           String
+  subtitle        String?
+  content         String?
+  user            User     @relation("userPosts", fields: [userId], references: [id])
+  userId          Int
+  likes           Like[]   @relation("likedPost")
+  likesCounter    Int
+  commentsCounter Int
+  image           String?
+  hashtags        String?
+  createdAt       DateTime @default(now())
 }
 
 model Like {
