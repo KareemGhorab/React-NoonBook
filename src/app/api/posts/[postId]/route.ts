@@ -15,7 +15,7 @@ export async function GET(
 
 		return NextResponse.json({ post })
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 		return NextResponse.json({ error })
 	}
 }
