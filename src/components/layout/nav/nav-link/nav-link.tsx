@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 import { Url } from "next/dist/shared/lib/router/router"
 
 import MyIcon, { MyIconProps } from "@/components/ui/myIcon"
+import styles from "./nav-link.module.scss"
 
 export interface NavElement {
 	icon: MyIconProps
@@ -24,11 +25,15 @@ export default function NavLink({ icon, title, link }: NavElement) {
 	return (
 		<li>
 			<Link href={link} prefetch={true}>
-				<div className="rounded-full md:h-20 md:flex md:items-center">
+				<div className={`${styles["nav-link"]} rounded-full`}>
 					<figure className="w-10 rounded-full p-1">
 						<MyIcon {...icon}></MyIcon>
 					</figure>
-					<div className="hidden md:block text-xl font-semibold">{title}</div>
+					<div
+						className={` ${styles["nav-link-title"]} hidden text-xl font-semibold`}
+					>
+						{title}
+					</div>
 				</div>
 			</Link>
 		</li>

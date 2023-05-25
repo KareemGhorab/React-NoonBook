@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+$screen-md: 768px;
+$screen-lg: 992px;
+
 ::-webkit-scrollbar {
 	display: none;
 }
@@ -11,6 +14,148 @@ body {
 	scrollbar-width: none;
 }
 
+.hidden {
+	display: none;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
 .flex--centered {
-	@apply flex justify-center items-center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.flex {
+	display: flex;
+}
+
+.grid {
+	display: grid;
+}
+
+.text-lg {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+}
+
+.text-xl {
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+}
+
+.text-2xl {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+
+.font-semibold {
+	font-weight: 600;
+}
+
+.font-bold {
+	font-weight: 700;
+}
+
+.rounded-full {
+	border-radius: 9999px;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.h-full {
+	height: 100%;
+}
+
+$spacing-start: 0;
+$spacing-end: 20;
+
+@for $i from $spacing-start through $spacing-end {
+	.m-#{$i} {
+		margin: #{($i * 0.25)}rem;
+	}
+
+	.mx-#{$i} {
+		margin-left: #{($i * 0.25)}rem;
+		margin-right: #{($i * 0.25)}rem;
+	}
+
+	.my-#{$i} {
+		margin-top: #{($i * 0.25)}rem;
+		margin-bottom: #{($i * 0.25)}rem;
+	}
+
+	.mt-#{$i} {
+		margin-top: #{($i * 0.25)}rem;
+	}
+
+	.mr-#{$i} {
+		margin-right: #{($i * 0.25)}rem;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: #{($i * 0.25)}rem;
+	}
+
+	.ml-#{$i} {
+		margin-left: #{($i * 0.25)}rem;
+	}
+
+	.p-#{$i} {
+		padding: #{($i * 0.25)}rem;
+	}
+
+	.px-#{$i} {
+		padding-left: #{($i * 0.25)}rem;
+		padding-right: #{($i * 0.25)}rem;
+	}
+
+	.py-#{$i} {
+		padding-top: #{($i * 0.25)}rem;
+		padding-bottom: #{($i * 0.25)}rem;
+	}
+
+	.pt-#{$i} {
+		padding-top: #{($i * 0.25)}rem;
+	}
+
+	.pr-#{$i} {
+		padding-right: #{($i * 0.25)}rem;
+	}
+
+	.pb-#{$i} {
+		padding-bottom: #{($i * 0.25)}rem;
+	}
+
+	.pl-#{$i} {
+		padding-left: #{($i * 0.25)}rem;
+	}
+
+	.w-#{$i} {
+		width: #{($i * 0.25)}rem;
+	}
+
+	.h-#{$i} {
+		height: #{($i * 0.25)}rem;
+	}
+
+	.gap-#{$i} {
+		gap: #{($i * 0.25)}rem;
+	}
+
+	.gap-x-#{$i} > * + * {
+		margin-left: #{($i * 0.25)}rem;
+	}
+
+	.gap-y-#{$i} > * + * {
+		margin-top: #{($i * 0.25)}rem;
+	}
 }

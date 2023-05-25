@@ -1,0 +1,35 @@
+@import "/src/styles/variables";
+
+.post {
+	align-items: flex-start;
+	border-width: 1px;
+	border-radius: 0.5rem;
+}
+
+.post__body {
+	height: 24rem;
+	background-position: center;
+	background-size: cover;
+}
+
+.post__footer {
+	align-items: flex-start;
+}
+
+.post__footer__p {
+	color: rgb(82 82 82);
+}
+
+.post__footer__like {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.post__footer__hash {
+	color: $blue-color;
+}
+
+.post__footer__comment {
+	color: rgb(163 163 163);
+}

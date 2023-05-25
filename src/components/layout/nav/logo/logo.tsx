@@ -1,10 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import styles from "./logo.module.scss"
+
 export default function Logo() {
 	return (
 		<Link href={"/"}>
-			<div className="hidden md:flex md:justify-center md:items-center w-60 rounded-lg bg-primary-500">
+			<div className={`${styles.logo}`}>
 				<figure className="w-20 rounded-full">
 					<Image
 						className="w-full h-full"
@@ -14,7 +16,7 @@ export default function Logo() {
 						width={255}
 					/>
 				</figure>
-				<h1 className="text-xl font-bold text-secondary-500 mr-2">
+				<h1 className={`${styles["logo-header"]}`}>
 					NoonBook
 				</h1>
 			</div>

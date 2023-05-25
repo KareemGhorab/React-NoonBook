@@ -1,5 +1,5 @@
 import { fetchPosts } from "@/actions/post"
-import ClientFeedPosts from "../client/feed-posts"
+import ClientFeedPosts from "../client/feed-posts/feed-posts"
 
 export default async function ServerFeedPosts() {
 	const posts = await fetchPosts(1)

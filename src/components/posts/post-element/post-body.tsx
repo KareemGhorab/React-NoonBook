@@ -1,5 +1,7 @@
 import Image from "next/image"
 
+import styles from "./post.module.scss"
+
 interface Props {
 	title: string
 	subtitle: string | null
@@ -10,7 +12,7 @@ interface Props {
 export default function PostBody({ title, subtitle, image, className }: Props) {
 	return (
 		<main className={`${className} w-full`}>
-			<figure className="bg-cover bg-center w-full h-96">
+			<figure className={`${styles["post__body"]} w-full`}>
 				<Image
 					className="w-full h-full"
 					src={"/" + image}

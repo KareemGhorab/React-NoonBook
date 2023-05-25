@@ -1,0 +1,13 @@
+@import "/src/styles/variables";
+
+@media screen and (min-width: $screen-md) {
+	.nav-link {
+		height: 5rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.nav-link-title {
+		display: block;
+	}
+}

@@ -1,0 +1,28 @@
+@import "/src/styles/variables";
+
+.nav-bar {
+	position: fixed;
+	background-color: white;
+	bottom: 0;
+	border-top-width: 1px;
+}
+
+.nav-bar-list {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+@media screen and (min-width: $screen-md) {
+	.nav-bar {
+		top: 0;
+		bottom: auto;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+	}
+
+	.nav-bar-list {
+		flex-grow: 1;
+	}
+}

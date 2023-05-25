@@ -1,5 +1,6 @@
-import Logo from "./logo"
-import NavLink, { NavElement } from "./nav-link"
+import Logo from "../logo/logo"
+import NavLink, { NavElement } from "../nav-link/nav-link"
+import styles from "./navbar.module.scss"
 
 const elements: NavElement[] = [
 	{
@@ -44,9 +45,9 @@ const elements: NavElement[] = [
 
 export default function Navbar() {
 	return (
-		<nav className="fixed bg-white bottom-0 w-full border-t py-2 px-5 md:top-0 md:bottom-auto md:shadow md:flex md:items-center md:w-full">
+		<nav className={`${styles["nav-bar"]} w-full py-2 px-5`}>
 			<Logo />
-			<ul className="flex justify-evenly md:grow">
+			<ul className={styles["nav-bar-list"]}>
 				{elements.map((element: NavElement) => (
 					<NavLink key={element.title} {...element}></NavLink>
 				))}

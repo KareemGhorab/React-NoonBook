@@ -1,10 +1,11 @@
 "use client"
 
+import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 
 import MyIcon from "@/components/ui/myIcon"
-import { useCallback, useEffect, useState } from "react"
 import useLocalStorage from "@/hooks/useLocalStorage"
+import styles from "./post.module.scss"
 
 interface Props {
 	likesCount: number
@@ -58,8 +59,8 @@ export default function PostFooter({
 	}, [isLiked])
 
 	return (
-		<footer className="flex flex-col items-start gap-2 px-3">
-			<section className="flex--centered gap-2">
+		<footer className={`${styles["post_footer"]} flex flex-col gap-2 px-3`}>
+			<section className={styles["post__footer__like"]}>
 				<div
 					className="w-8 cursor-pointer"
 					onClick={() => {
@@ -86,9 +87,9 @@ export default function PostFooter({
 			</section>
 			<section className="grid gap-3">
 				<div>
-					<p className="text-neutral-600">{content}</p>
+					<p className={styles["post__footer__p"]}>{content}</p>
 					{hashtags.trim().length > 0 && (
-						<p className="text-blue-500">
+						<p className={styles["post__footer__hash"]}>
 							{hashtags.split(" ").map((hashtag) => (
 								<Link key={hashtag} href={"#"}>
 									#{hashtag}{" "}
@@ -98,7 +99,9 @@ export default function PostFooter({
 					)}
 				</div>
 
-				<p className="cursor-pointer text-neutral-400">
+				<p
+					className={`${styles["post__footer__comment"]} cursor-pointer`}
+				>
 					{commentsCount
 						? `View ${commentsCount} ${
 								commentsCount === 1 ? "comment" : "comments"

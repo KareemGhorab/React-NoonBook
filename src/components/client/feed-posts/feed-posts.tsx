@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 import { User, Post } from "@prisma/client"
-import PostsList from "../posts/posts-list"
-import LoadingIcon from "../ui/loading-icon"
+import PostsList from "../../posts/posts-list"
+import LoadingIcon from "../../ui/loading-icon"
+import styles from "./feed-posts.module.scss"
 
 const getNewPosts = async (page: number) => {
 	const {
@@ -59,10 +60,7 @@ export default function ClientFeedPosts({
 				) : isLoadingNewPosts ? (
 					<LoadingIcon className="w-10" />
 				) : (
-					<button
-						className="text-blue-500 text-lg"
-						onClick={loadMoreHandler}
-					>
+					<button className={styles["btn"]} onClick={loadMoreHandler}>
 						Load More
 					</button>
 				)}
