@@ -5,7 +5,7 @@ import { Post, PrismaClient, User } from "@prisma/client"
 export type FullUserLikes = User & { likes: { post: Post & { user: User } }[] }
 
 const prisma = new PrismaClient()
-const PAGE_SIZE = 3
+const PAGE_SIZE = 15
 
 export const fetchPosts = async (
 	page: number
