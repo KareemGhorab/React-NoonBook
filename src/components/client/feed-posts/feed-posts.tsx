@@ -11,11 +11,14 @@ import styles from "./feed-posts.module.scss"
 const getNewPosts = async (page: number) => {
 	const {
 		data: { posts },
-	} = await axios.get<{ posts: (Post & { user: User })[] }>("/api/posts", {
-		params: {
-			page,
-		},
-	})
+	} = await axios.get<{ posts: (Post & { user: User })[] }>(
+		"https://react-noon-book.vercel.app//api/posts",
+		{
+			params: {
+				page,
+			},
+		}
+	)
 
 	console.log("new posts: ")
 	console.log(posts)
