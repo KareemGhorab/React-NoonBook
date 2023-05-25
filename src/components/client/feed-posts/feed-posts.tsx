@@ -12,7 +12,7 @@ const getNewPosts = async (page: number) => {
 	const {
 		data: { posts },
 	} = await axios.get<{ posts: (Post & { user: User })[] }>(
-		"https://react-noon-book.vercel.app/api/posts",
+		"/api/posts",
 		{
 			params: {
 				page,
