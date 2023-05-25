@@ -3,7 +3,7 @@ import Image from "next/image"
 interface Props {
 	title: string
 	subtitle: string | null
-	image: string | null
+	image: string
 	className?: string
 }
 
@@ -15,8 +15,8 @@ export default function PostBody({ title, subtitle, image, className }: Props) {
 					className="w-full h-full"
 					src={"/" + image}
 					alt={title}
-					width={1000}
-					height={1000}
+					width={400}
+					height={400}
 				></Image>
 			</figure>
 		</main>

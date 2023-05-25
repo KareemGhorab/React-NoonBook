@@ -5,7 +5,7 @@ import { Post, PrismaClient, User } from "@prisma/client"
 export type FullUserLikes = User & { likes: { post: Post & { user: User } }[] }
 
 const prisma = new PrismaClient()
-const PAGE_SIZE = 15
+const PAGE_SIZE = 3
 
 export const fetchPosts = async (
 	page: number
@@ -52,6 +52,14 @@ export const fetchLikedPosts = async (
 
 export const toggleLikePost = async (postId: number, userId: number = 1) => {
 	if (await isLiked(postId, userId)) {
+		await prisma.post.update({
+			data: {
+				likesCounter: { increment: -1 },
+			},
+			where: {
+				id: postId,
+			},
+		})
 		return await prisma.like.delete({
 			where: {
 				userId_postId: {
@@ -61,6 +69,15 @@ export const toggleLikePost = async (postId: number, userId: number = 1) => {
 			},
 		})
 	}
+
+	await prisma.post.update({
+		data: {
+			likesCounter: { increment: 1 },
+		},
+		where: {
+			id: postId,
+		},
+	})
 
 	return await prisma.like.create({
 		data: { postId, userId },
