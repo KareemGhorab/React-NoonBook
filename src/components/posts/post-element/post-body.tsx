@@ -11,7 +11,7 @@ interface Props {
 
 export default function PostBody({ title, subtitle, image, className }: Props) {
 	return (
-		<main className={`${className} w-full`}>
+		<main className={`${className} w-full relative`}>
 			<figure className={`${styles["post__body"]} w-full`}>
 				<Image
 					className="w-full h-full"
@@ -19,8 +19,12 @@ export default function PostBody({ title, subtitle, image, className }: Props) {
 					alt={title}
 					width={400}
 					height={400}
-				></Image>
+				/>
 			</figure>
+			<figcaption className="absolute bottom-12 left-4 flex flex-col">
+				<p className="text-white font-semibold">{title}</p>
+				<p className="text-neutral-300">{subtitle}</p>
+			</figcaption>
 		</main>
 	)
 }
