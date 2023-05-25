@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import { fetchPosts } from "@/actions/post"
-import { Post, User } from "@prisma/client"
+import FullPost from "@/types/full-post"
 
 export async function GET(request: Request) {
 	try {
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
 		console.log(searchParams)
 
 		const page = +(searchParams.get("page") ?? 1)
-		const posts: (Post & { user: User })[] = await fetchPosts(page)
+		const posts: FullPost[] = await fetchPosts(page)
 
 		return NextResponse.json({ posts })
 	} catch (error) {

@@ -3,7 +3,8 @@
 import Link from "next/link"
 
 import MyIcon from "@/components/ui/myIcon"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import useLocalStorage from "@/hooks/useLocalStorage"
 
 interface Props {
 	likesCount: number
@@ -13,20 +14,22 @@ interface Props {
 	postId: number
 }
 
-const toggleLike = async (postId: number) => {
-	console.log(process.env.URL)
-	await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`, {
-		method: "POST",
-	})
-}
+//#region old impl
+// const toggleLike = async (postId: number) => {
+// 	console.log(process.env.URL)
+// 	await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`, {
+// 		method: "POST",
+// 	})
+// }
 
-const isLiked = async (postId: number): Promise<boolean> => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`
-	)
-	const is: { liked: boolean } = await res.json()
-	return is.liked
-}
+// const isLiked = async (postId: number): Promise<boolean> => {
+// 	const res = await fetch(
+// 		`${process.env.NEXT_PUBLIC_URL}/api/users/1/likes/${postId}`
+// 	)
+// 	const is: { liked: boolean } = await res.json()
+// 	return is.liked
+// }
+//#endregion
 
 export default function PostFooter({
 	commentsCount,
@@ -35,11 +38,24 @@ export default function PostFooter({
 	hashtags,
 	postId,
 }: Props) {
+	const [posts, setPosts] = useLocalStorage<number[]>("likes", [])
 	const [liked, setLiked] = useState(false)
 
+	const toggleLike = async () => {
+		if (isLiked()) {
+			setPosts((prev) => prev.filter((post) => post !== postId))
+			return
+		}
+		setPosts((prev) => prev.concat([postId]))
+	}
+
+	const isLiked = useCallback((): boolean => {
+		return posts.some((post) => post === postId)
+	}, [postId, posts])
+
 	useEffect(() => {
-		isLiked(postId).then((data: boolean) => setLiked(data))
-	}, [postId])
+		setLiked(isLiked())
+	}, [isLiked])
 
 	return (
 		<footer className="flex flex-col items-start gap-2 px-3">
@@ -47,8 +63,7 @@ export default function PostFooter({
 				<div
 					className="w-8 cursor-pointer"
 					onClick={() => {
-						toggleLike(postId)
-						setLiked((prev) => !prev)
+						toggleLike()
 					}}
 				>
 					<MyIcon

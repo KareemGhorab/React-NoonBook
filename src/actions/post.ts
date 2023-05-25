@@ -1,5 +1,6 @@
 "use server"
 
+import FullPost from "@/types/full-post"
 import { Post, PrismaClient, User } from "@prisma/client"
 
 export type FullUserLikes = User & { likes: { post: Post & { user: User } }[] }
@@ -21,6 +22,13 @@ export const fetchPosts = async (
 			user: true,
 		},
 		orderBy: { createdAt: "desc" },
+	})
+}
+
+export const fetchPost = async (postId: number): Promise<FullPost | null> => {
+	return await prisma.post.findFirst({
+		where: { id: postId },
+		include: { user: true },
 	})
 }
 

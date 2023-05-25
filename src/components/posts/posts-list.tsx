@@ -1,18 +1,14 @@
 "use client"
 
-import { Post, User } from "@prisma/client"
 import PostElement from "./post-element/post-element"
+import FullPost from "@/types/full-post"
 
-export default function PostsList({
-	posts,
-}: {
-	posts: (Post & { user: User })[]
-}) {
+export default function PostsList({ posts }: { posts: FullPost[] }) {
 	return (
 		<>
 			{posts.length ? (
 				<ul className={`flex items-center flex-col gap-4`}>
-					{posts.map((post: Post & { user: User }) => (
+					{posts.map((post: FullPost) => (
 						<PostElement key={post.id} {...post} />
 					))}
 				</ul>
