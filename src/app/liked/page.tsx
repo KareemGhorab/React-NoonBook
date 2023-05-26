@@ -2,6 +2,7 @@
 
 import PostsList from "@/components/posts/posts-list"
 import LoadingIcon from "@/components/ui/loading-icon"
+import { useLikes } from "@/context/likes-context"
 import useLocalStorage from "@/hooks/useLocalStorage"
 import FullPost from "@/types/full-post"
 import axios from "axios"
@@ -23,7 +24,7 @@ const getPosts = async (ids: number[]): Promise<FullPost[]> => {
 }
 
 export default async function Liked() {
-	const [postIds] = useLocalStorage<number[]>("likes", [])
+	const [postIds] = useLikes()
 	const [posts, setPosts] = useState<FullPost[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 

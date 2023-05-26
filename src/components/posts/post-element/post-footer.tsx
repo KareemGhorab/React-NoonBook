@@ -6,6 +6,7 @@ import Link from "next/link"
 import MyIcon from "@/components/ui/myIcon"
 import useLocalStorage from "@/hooks/useLocalStorage"
 import styles from "./post.module.scss"
+import { useLikes } from "@/context/likes-context"
 
 interface Props {
 	likesCount: number
@@ -39,20 +40,20 @@ export default function PostFooter({
 	hashtags,
 	postId,
 }: Props) {
-	const [posts, setPosts] = useLocalStorage<number[]>("likes", [])
+	const [likes, setLikes] = useLikes()
 	const [liked, setLiked] = useState(false)
 
 	const toggleLike = async () => {
 		if (isLiked()) {
-			setPosts((prev) => prev.filter((post) => post !== postId))
+			setLikes((prev) => prev.filter((post) => post !== postId))
 			return
 		}
-		setPosts((prev) => prev.concat([postId]))
+		setLikes((prev) => prev.concat([postId]))
 	}
 
 	const isLiked = useCallback((): boolean => {
-		return posts.some((post) => post === postId)
-	}, [postId, posts])
+		return likes.some((post) => post === postId)
+	}, [likes, postId])
 
 	useEffect(() => {
 		setLiked(isLiked())
